@@ -193,8 +193,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.033435583, y: 0.82925344}
-  m_Size: {x: 1.9616561, y: 3.2671762}
+  m_Offset: {x: 0.033435583, y: 0.71483684}
+  m_Size: {x: 1.9616561, y: 3.4960093}
   m_Direction: 0
 --- !u!114 &25726880
 MonoBehaviour:
@@ -215,6 +215,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  damage: 0
 --- !u!95 &25726881
 Animator:
   serializedVersion: 3
@@ -1198,9 +1199,10 @@ GameObject:
   - component: {fileID: 814478969}
   - component: {fileID: 814478971}
   - component: {fileID: 814478972}
+  - component: {fileID: 814478973}
   m_Layer: 9
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1213,7 +1215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814478967}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.87, y: -3.8, z: -1}
+  m_LocalPosition: {x: -6.51, y: -3.8, z: -1}
   m_LocalScale: {x: 0.55353, y: 0.55353, z: 0.55353}
   m_Children:
   - {fileID: 609676058}
@@ -1290,8 +1292,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f019edf4d8fb3448e75ba8550c62c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 2
   checkRadius: 0
+  health: 3
+--- !u!58 &814478973
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814478967}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
 --- !u!1 &878891346
 GameObject:
   m_ObjectHideFlags: 0

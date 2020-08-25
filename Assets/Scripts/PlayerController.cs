@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Transform feetPos; //Считываем позицию ног, для определения на земле ли персонаж
     public float checkRadius; // Радиус касаная игрока с землёй
     public LayerMask whatIsGround; // Что мы считаем за землю
+    public int damage;
 
     private float moveImput;
     private Rigidbody2D rb;
@@ -33,6 +34,16 @@ public class PlayerController : MonoBehaviour
         }
         if (isGrounded == true) anim.SetBool("IsJumping", false);
         else anim.SetBool("IsJumping", true);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            anim.SetTrigger("AttackTrigger");
+            //if (colider.CompareTag("Enemies"))
+            //{
+
+            //}
+        }
+
     }
     private void FixedUpdate()
     {
