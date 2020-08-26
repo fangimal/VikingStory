@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float speed, jumpForce;
+    public float speed, jumpForce, health;
     public Transform feetPos; //Считываем позицию ног, для определения на земле ли персонаж
     public float checkRadius; // Радиус касаная игрока с землёй
     public LayerMask whatIsGround; // Что мы считаем за землю

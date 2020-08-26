@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 25726878}
   - component: {fileID: 25726880}
   - component: {fileID: 25726881}
+  - component: {fileID: 25726882}
   m_Layer: 0
   m_Name: Viking
   m_TagString: Player
@@ -208,14 +209,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3784b5956daedd9499e414c9c86ddfe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 5
   jumpForce: 4
+  health: 10
   feetPos: {fileID: 1181831867}
   checkRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  damage: 0
+  damage: 1
 --- !u!95 &25726881
 Animator:
   serializedVersion: 3
@@ -235,6 +237,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &25726882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25726876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20fec718d205e74bae2194b0eca9bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startTimeBtwAttack: 0.5
+  attackPos: {fileID: 1243756735}
+  enemy:
+    serializedVersion: 2
+    m_Bits: 512
+  attackRange: 0.65
+  damage: 1
+  anim: {fileID: 25726881}
 --- !u!1 &28581104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,7 +1224,7 @@ GameObject:
   - component: {fileID: 814478973}
   m_Layer: 9
   m_Name: Goblin
-  m_TagString: Enemies
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1258,8 +1280,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01390269, y: 0.60407794}
-  m_Size: {x: 2.084172, y: 3.0874627}
+  m_Offset: {x: -0.020917244, y: 0.60407776}
+  m_Size: {x: 2.1823874, y: 3.0874624}
   m_Direction: 0
 --- !u!95 &814478971
 Animator:
@@ -1292,9 +1314,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f019edf4d8fb3448e75ba8550c62c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  checkRadius: 0
+  speed: 3
   health: 3
+  startTimeBtwAttack: 1
+  startStopTime: 0.7
+  normalSpeed: 3
+  deathEffect: {fileID: 0}
+  damage: 1
 --- !u!58 &814478973
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1306,11 +1332,11 @@ CircleCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 3
 --- !u!1 &878891346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1530,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1243756734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1243756735}
+  m_Layer: 0
+  m_Name: attackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1243756735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243756734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.11, y: 0.926, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1268218115}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1268218113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,7 +1637,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.35, y: -1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1243756735}
   m_Father: {fileID: 878891348}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
