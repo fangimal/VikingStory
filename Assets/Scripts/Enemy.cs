@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private PlayerController player;
+    private ScoreManager sm;
 
     public float speed, health, startTimeBtwAttack, startStopTime, normalSpeed; //Скорость бега, очки жизни
     public GameObject deathEffect;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        sm = FindObjectOfType<ScoreManager>();
         anim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerController>();
         normalSpeed = speed;
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
         }
         if (health <= 0)
         {
+            sm.Kill();
             Destroy(gameObject);
         }
         transform.Translate(Vector2.right * speed * Time.deltaTime);

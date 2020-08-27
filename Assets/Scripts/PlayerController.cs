@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class PlayerController : MonoBehaviour
 {
 
     public float speed, jumpForce, health;
+    public float heal;
     public Transform feetPos; //Считываем позицию ног, для определения на земле ли персонаж
     public float checkRadius; // Радиус касаная игрока с землёй
     public LayerMask whatIsGround; // Что мы считаем за землю
-    public int damage;
+    public int damage, numOfHearts;
+    public Image[] hearts;
+    public Sprite fullHeart, emptyHeart;
 
     private float moveImput;
     private Rigidbody2D rb;
@@ -47,6 +53,37 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (health > numOfHearts)
+        {
+            health = numOfHearts;
+        }
+
+        health += Time.deltaTime * heal;
+
+        for(int i=0; i<hearts.Length; i++)
+        {
+            if (i < Mathf.RoundToInt(health))
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = emptyHeart;
+            }
+            if(i < numOfHearts)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+            if (health < 1)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+
         moveImput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveImput * speed, rb.velocity.y);
         if (facinRight == false && moveImput > 0)
