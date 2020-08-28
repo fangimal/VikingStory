@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -22,11 +21,15 @@ public class PlayerController : MonoBehaviour
     private bool facinRight = true;
     private bool isGrounded; //Приземлился ли игрок
     private Animator anim;
+    private LevelManager levelManager;
+    
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        levelManager = GameObject.FindObjectOfType<LevelManager>();
+        
     }
 
     
@@ -80,8 +83,10 @@ public class PlayerController : MonoBehaviour
             }
             if (health < 1)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+                
+                levelManager.LoadLevel("Start");
+                //SceneManager.LoadScene("Start");
+}
         }
 
         moveImput = Input.GetAxis("Horizontal");

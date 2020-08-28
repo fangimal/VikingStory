@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int score;
+    
     public Text scoreDisplay;
+    private int score;
 
     void Start()
     {
-        
+        score = 0;
     }
 
 
@@ -22,5 +23,6 @@ public class ScoreManager : MonoBehaviour
     public void Kill()
     {
         score++;
+        PlayerPrefs.SetInt("Score", score);
     }
 }
