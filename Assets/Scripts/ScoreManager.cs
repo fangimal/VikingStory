@@ -18,11 +18,13 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         scoreDisplay.text = "Счёт: " + score.ToString();
+        
     }
 
     public void Kill()
     {
         score++;
         PlayerPrefs.SetInt("Score", score);
+       
     }
 }

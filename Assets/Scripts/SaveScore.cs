@@ -10,7 +10,7 @@ public class SaveScore : MonoBehaviour
     private int score;
     void Start()
     {
-        score = PlayerPrefs.GetInt("score");
+        score = PlayerPrefs.GetInt("Score");
         scoreDisplay.text = "Последний счёт: " + score.ToString();
         
     }

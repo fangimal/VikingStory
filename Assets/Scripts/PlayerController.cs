@@ -21,15 +21,14 @@ public class PlayerController : MonoBehaviour
     private bool facinRight = true;
     private bool isGrounded; //Приземлился ли игрок
     private Animator anim;
-    private LevelManager levelManager;
-    
+    private LevelManager levelManager; 
+
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         levelManager = GameObject.FindObjectOfType<LevelManager>();
-        
     }
 
     
@@ -44,14 +43,11 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true) anim.SetBool("IsJumping", false);
         else anim.SetBool("IsJumping", true);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            anim.SetTrigger("AttackTrigger");
-            //if (colider.CompareTag("Enemies"))
-            //{
-
-            //}
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Instantiate(sound, transform.position, Quaternion.identity);
+        //    anim.SetTrigger("AttackTrigger");
+        //}
 
     }
     private void FixedUpdate()
@@ -84,8 +80,7 @@ public class PlayerController : MonoBehaviour
             if (health < 1)
             {
                 
-                levelManager.LoadLevel("Start");
-                //SceneManager.LoadScene("Start");
+                levelManager.LoadLevel("StartMenu");
 }
         }
 
@@ -108,7 +103,6 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsRunning", true);
         }
     }
-
 
     void Flip()
     {

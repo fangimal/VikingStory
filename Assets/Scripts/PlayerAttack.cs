@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private float timeBtwAttack;
+    
 
     public float startTimeBtwAttack;
     public Transform attackPos; //Позиция атаки
@@ -13,11 +14,20 @@ public class PlayerAttack : MonoBehaviour
     public int damage;
     public Animator anim;
 
+    AudioSource audiosound;
+
+
+
+    private void Start()
+    {
+        audiosound = GetComponent<AudioSource>();
+    }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
+        
     }
 
 
@@ -28,6 +38,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 anim.SetTrigger("AttackTrigger");
+                audiosound.Play();
 
             }
             timeBtwAttack = startTimeBtwAttack;
