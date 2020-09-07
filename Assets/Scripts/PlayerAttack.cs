@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private float timeBtwAttack;
-    
+    public float timeBtwAttack; //перезарядка
+
 
     public float startTimeBtwAttack;
     public Transform attackPos; //Позиция атаки
@@ -16,8 +14,6 @@ public class PlayerAttack : MonoBehaviour
 
     AudioSource audiosound;
 
-
-
     private void Start()
     {
         audiosound = GetComponent<AudioSource>();
@@ -27,26 +23,30 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
-        
+
     }
 
 
     void Update()
     {
+        //if (Input.GetMouseButton(0))
+        //{
+        //    OnAttackButtonDown();
+        //}
+        timeBtwAttack -= Time.deltaTime;
+    }
+    public void OnAttackButtonDown()
+    {
         if (timeBtwAttack <= 0)
         {
-            if (Input.GetMouseButton(0))
-            {
-                anim.SetTrigger("AttackTrigger");
-                audiosound.Play();
-
-            }
+            anim.SetTrigger("AttackTrigger");
+            audiosound.Play();
             timeBtwAttack = startTimeBtwAttack;
         }
-        else
-        {
-            timeBtwAttack -= Time.deltaTime;
-        }
+        //else
+        //{
+        //    timeBtwAttack -= Time.deltaTime;
+        //}
     }
 
     public void OnAttack()

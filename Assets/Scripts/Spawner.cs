@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
@@ -18,30 +16,31 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
-   
+
     void Update()
     {
         enemyDamage += Time.deltaTime * increaseDamage;
         enemyHealth += Time.deltaTime * increaseHealth;
 
-        if(timeBtwSpawn <= 0)
+        if (timeBtwSpawn <= 0)
         {
             int rand = Random.Range(0, variants.Length);
             Instantiate(variants[rand], transform.position, Quaternion.identity);
+            
             timeBtwSpawn = startTimeBtwSpawn;
-            if(startTimeBtwSpawn > minTime)
+            if (startTimeBtwSpawn > minTime)
             {
                 startTimeBtwSpawn -= decreaseTime;
             }
         }
         else
-            {
-                timeBtwSpawn -= Time.deltaTime;
-            }
-        
+        {
+            timeBtwSpawn -= Time.deltaTime;
+        }
+
     }
 
 

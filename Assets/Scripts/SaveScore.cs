@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -11,12 +9,12 @@ public class SaveScore : MonoBehaviour
     void Start()
     {
         score = PlayerPrefs.GetInt("Score");
-        scoreDisplay.text = "Последний счёт: " + score.ToString();
-        
+        scoreDisplay.text = score.ToString();
+
     }
 
     void Update()
     {
-        
+
     }
 }
