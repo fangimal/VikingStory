@@ -79,6 +79,10 @@ public class Enemy : MonoBehaviour
     public void OnEnemyAttack()
     {
         //Instantiate(deathEffect, player.transform.position, Quaternion.identity);
+        //if (true)
+        //{
+        //    player.health -= damage;
+        //}
         player.health -= damage;
         timeBtwAttack = startTimeBtwAttack;
     }
