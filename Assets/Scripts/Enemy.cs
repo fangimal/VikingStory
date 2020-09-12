@@ -21,22 +21,26 @@ public class Enemy : MonoBehaviour
         sm = FindObjectOfType<ScoreManager>();
         anim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerController>();
-        normalSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
     }
 
 
     void Update()
     {
-        if(stopTime <= 0)
+        float xPos = Mathf.Abs(player.transform.position.x - transform.position.x);
+        if (xPos <= 5f)
         {
-            speed = normalSpeed;
+            speed = 0f;
+            anim.SetBool("IsRunning", false);
+            anim.SetBool("IsAlert", true);
         }
         else
         {
-            speed = 0;
-            stopTime -= Time.deltaTime;
+            speed = normalSpeed;
+            anim.SetBool("IsAlert", false);
+            anim.SetBool("IsRunning", true);
         }
+
         if (trigger)
         {
             speed = 0;
@@ -55,7 +59,6 @@ public class Enemy : MonoBehaviour
         stopTime = startStopTime;
         //Instantiate(deathEffect, transform.position, Quaternion.identity);
         health -= damage;
-        
     }
 
     public void OnTriggerStay2D(Collider2D collider)
@@ -63,26 +66,22 @@ public class Enemy : MonoBehaviour
         
         if (collider.CompareTag("Player"))
         {
-            trigger = true;
-            anim.SetBool("IsRunning", false);
-            anim.SetBool("IsAlert", true);
-            anim.SetTrigger("AttackTrigger");
+            //trigger = true;
             speed = 0f;
+            anim.SetBool("IsRunning", false); 
+            anim.SetTrigger("AttackTrigger");
         }
         else
         {
             timeBtwAttack -= Time.deltaTime;
         }
-        
     }
+
+
 
     public void OnEnemyAttack()
     {
         //Instantiate(deathEffect, player.transform.position, Quaternion.identity);
-        //if (true)
-        //{
-        //    player.health -= damage;
-        //}
         player.health -= damage;
         timeBtwAttack = startTimeBtwAttack;
     }
